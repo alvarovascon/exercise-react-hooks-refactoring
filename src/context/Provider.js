@@ -1,17 +1,17 @@
 // src/context/Provider.js
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import CarsContext from './CarsContext';
 
-class Provider extends Component {
+function Provider() {
   constructor(props) {
     super(props);
     this.state = {
       cars: {
-        red: false,
-        blue: false,
-        yellow: false,
+        redCar: false,
+        blueCar: false,
+        yellowCar: false,
       },
       signal: {
         color: 'red',
@@ -21,12 +21,10 @@ class Provider extends Component {
     this.changeSignal = this.changeSignal.bind(this);
   }
 
-  moveCar(car, side) {
-    this.setState({
-      cars: {
-        ...this.state.cars,
-        [car]: side,
-      },
+  const moveCar = (car, side) => {
+    setCars({
+      ...cars,
+      [car]: side,
     });
   };
 
@@ -39,21 +37,14 @@ class Provider extends Component {
     });
   };
 
-  render() {
-    const context = {
-      ...this.state,
-      moveCar: this.moveCar,
-      changeSignal: this.changeSignal,
-    };
-
-    const { children } = this.props;
+  const context = {cars, moveCar, };
 
     return (
       <CarsContext.Provider value={context}>
         {children}
       </CarsContext.Provider>
     );
-  }
+  
 };
 
 Provider.propTypes = {
