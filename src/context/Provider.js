@@ -11,9 +11,7 @@ const Provider = ({ children }) => {
           blueCar: false,
           yellowCar: false,
         },
-      });
-
-  const [signal, setSignal] = useState({color: 'yellow'})    
+      });   
 
   const moveCar = (car, side) => {
     setCars({
@@ -22,12 +20,12 @@ const Provider = ({ children }) => {
     });
   };
 
+  const [signal, setSignal] = useState({color: 'red'}) 
+
   const changeSignal = (signalColor) => {
     setSignal({
-      signal: {
-        ...this.state.signal,
-        color: signalColor,
-      },
+      ...signal,
+      color: signalColor,
     });
   };
 
