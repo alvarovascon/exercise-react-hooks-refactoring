@@ -4,22 +4,16 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import CarsContext from './CarsContext';
 
-function Provider() {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cars: {
-        redCar: false,
-        blueCar: false,
-        yellowCar: false,
-      },
-      signal: {
-        color: 'red',
-      },
-    }
-    this.moveCar = this.moveCar.bind(this);
-    this.changeSignal = this.changeSignal.bind(this);
-  }
+const Provider = ({ children }) => {
+  const [cars, setCars] = useState({
+        cars: {
+          redCar: false,
+          blueCar: false,
+          yellowCar: false,
+        },
+      });
+
+  const [signal, setSignal] = useState({color: 'yellow'})    
 
   const moveCar = (car, side) => {
     setCars({
@@ -28,8 +22,8 @@ function Provider() {
     });
   };
 
-  changeSignal(signalColor) {
-    this.setState({
+  const changeSignal = (signalColor) => {
+    setSignal({
       signal: {
         ...this.state.signal,
         color: signalColor,
@@ -37,7 +31,7 @@ function Provider() {
     });
   };
 
-  const context = {cars, moveCar, };
+  const context = {cars, moveCar, signal, changeSignal };
 
     return (
       <CarsContext.Provider value={context}>
